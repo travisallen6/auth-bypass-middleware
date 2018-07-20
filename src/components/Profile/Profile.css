@@ -1,0 +1,16 @@
+.profile-card {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+    width: 400px;
+    height: 410px;
+    background: #FEFEFE;
+    padding: 30px;
+    margin-top: 50px;
+}
+
+.profile-container {
+    height: 590px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
