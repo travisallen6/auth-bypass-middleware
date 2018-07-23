@@ -32,7 +32,7 @@ massive( CONNECTION_STRING )
 
 // app.use(mid.bypassAuthInDevelopment)
 
-app.use(mid.bypassAuthInDevelopmentWithDB)
+// app.use(mid.bypassAuthInDevelopmentWithDB)
 
 app.get('/auth/callback', ctrl.authCallback)
 
