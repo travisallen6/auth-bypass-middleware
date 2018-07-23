@@ -30,17 +30,22 @@ massive( CONNECTION_STRING )
     dU.bootstrapDB(db)
 })
 
-app.use(mid.bypassAuthInDevelopment)
+// app.use(mid.bypassAuthInDevelopment)
+
+app.use(mid.bypassAuthInDevelopmentWithDB)
 
 app.get('/auth/callback', ctrl.authCallback)
 
-app.get('/api/user-data', ctrl.authCheck)
+app.get('/api/user', ctrl.authCheck)
 
 app.get('/api/logout', ctrl.logout)
 
-app.post('/api/favorites', ctrl.addFavorite)
+app.route('/api/favorites')
+    .get(ctrl.getFavorites)
+    .post(ctrl.addFavorite)
 
 app.get('/cleanupdb', dU.cleanupDB)
+app.get('/killprocess', dU.killProcess)
 
 
 app.listen( SERVER_PORT, () => console.log( chalk.cyan.underline(`Hard to port ${SERVER_PORT}`) ))

@@ -12,22 +12,44 @@ class Profile extends Component {
                 user_name: '',
                 user_pic: 'http://via.placeholder.com/150x150'
             },
-            favInput: ''
+            favInput: '',
+            favorites: []
          }
     }
 
     componentDidMount() {
-        axios.get('/api/user-data')
-        .then( user => this.setState({user: user.data}))
-        .catch( err => {
-            console.log(err)
+        axios.get('/api/user')
+        .then( user => {
+            console.log(user.data)
+            axios.get('/api/favorites')
+            .then( favorites => {
+                console.log()
+                this.setState({
+                    user: user.data,
+                    favorites: favorites.data,
+                    favInput: ''
+                })
+            })
+            .catch( err => {
+               alert(`${err} \n If you didn't log in, you are getting this error because your request to get the favorites for the current user is failing because req.session.user is undefined. If you check your server's console, you should see 'TypeError: Cannot read property 'id' of undefined'. If you uncomment the `)
+            })
         })
+        .catch( err => {
+            alert(`${err} \n If this error is a 401, that is because this component is sending a request to the server to check for a currently authenticated user but there is no user currently logged in. If you had logged in previously, it's pretty common to lose your session as a result of restarting the server which happens a lot when you are developing on your server.`)
+        })
+       
     }
 
-    handleSubmit = (e) => {
-        const {favInput} = this.state
+    submitFavorite = (e) => {
         e.preventDefault()
-        axios.post('/api/favorites', )
+        const {favInput} = this.state
+        axios.post('/api/favorites', {
+            text: favInput
+        }).then( favorites => {
+            this.setState({ favorites: favorites.data })
+        }).catch( err => {
+            console.log(err)
+        })
     }
 
     handleInput = (e) => {
@@ -59,11 +81,14 @@ class Profile extends Component {
                 <div className="profile-card">
                     <h2>Favorites</h2>
                     <form onSubmit={this.submitFavorite}>
-                        <input onChange={this.handleInput} type="text"/>
+                        <input value={ this.state.favInput } onChange={this.handleInput} type="text"/>
                         <button type="submit">
                             Add Favorite
                         </button>
                     </form>
+                    <ul className='profile-list'>
+                        { this.state.favorites.map( fav => <li key={ fav.id }> { fav.favorite_text } </li>) }
+                    </ul>
                 </div>
             </div>
          );

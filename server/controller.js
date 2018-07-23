@@ -1,4 +1,11 @@
 require('dotenv').config()
+const axios = require('axios')
+
+const {
+    REACT_APP_CLIENT_ID,
+    REACT_APP_DOMAIN,
+    CLIENT_SECRET
+} = process.env
 
 module.exports = {
     authCallback: async (req, res) => {
@@ -33,9 +40,9 @@ module.exports = {
 
     authCheck: (req, res)=>{
         if(req.session.user) {
-            res.status(200).send(req.session.user)
+            return res.status(200).send(req.session.user)
         } else {
-            res.status(401).send('Prohibidabido')
+            return res.status(401).send('Prohibidabido')
         }
     },
 
@@ -45,12 +52,23 @@ module.exports = {
     },
 
     addFavorite: (req, res) => {
-        if(!req.session.user){
-            return res.status(401).send('I don\'t know who you are, so I cant add this favorite to the database')
-        } else {
-            req.app.get('db')
-        }
+        const { id } = req.session.user
+        const { text } = req.body
+       req.app.get('db').add_user_favorite([id, text])
+       .then( favorites => res.send(favorites))
+       .catch( err => console.log(err) )
+    },
+
+    getFavorites: (req, res) => {
+        req.app.get('db').get_user_favorites([req.session.user.id])
+        .then( favorites => res.send(favorites))
+        .catch( err => {
+            if(!req.session.user) {
+                res.status(500).send('No user on req.session.user. This is caused when a user is not "logged in"')
+            } else {
+                console.log(err)
+                res.status(500).send(err.stack)
+            }
+        })
     }
-
-
 }

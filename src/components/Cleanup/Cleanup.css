@@ -1,4 +1,4 @@
-.profile-card {
+.cleanup-card {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
     width: 400px;
     height: 410px;
@@ -7,7 +7,21 @@
     margin-top: 50px;
 }
 
-.profile-container {
+.cleanup-card > p {
+    text-align: start;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+.cleanup-card > button {
+    width: 220px;
+    height: 60px;
+    background: red;
+    color: white;
+    font-size: 30px;
+}
+
+.cleanup-container {
     height: 590px;
     width: 100%;
     display: flex;
@@ -15,8 +29,3 @@
     align-items: center;
 }
 
-.profile-list {
-    margin: 0 auto;
-    padding: 10px 90px;
-    text-align: start;
-}
