@@ -46,7 +46,10 @@ class Profile extends Component {
         axios.post('/api/favorites', {
             text: favInput
         }).then( favorites => {
-            this.setState({ favorites: favorites.data })
+            this.setState({ 
+                favorites: favorites.data,
+                favInput: ''
+            })
         }).catch( err => {
             console.log(err)
         })
