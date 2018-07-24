@@ -141,28 +141,5 @@ Let's take a look at our second middleware option which will directly query the 
 1. Refresh your browser
 1. You should no longer see Ron Swanson logged in, but instead the user from the database with the ID you specified should now be logged in.
 
-### Setup Complete
-
-## The Problem
-
-Incorporating authentication into an application allows us to create a personalized experience for each of our users. As we start to incorporate authentication into an app, we find out that several components become dependent of aspects of a users session, meaning that as we develop and debug, we need to log in over and over again to prevent the parts of our app that use user data on a session from breaking. In doing so, we waste tons of time and the mounting levels of frustration cause our debugging skills to go down the toilet.
-
-### Demonstrating the Problem
-1. Open a terminal and run `nodemon` in the root of the project directory.
-1. Open a second terminal and run `npm start` in the root of the project directory.
-1. Before logging in, click the profile link in the header.
-1. You should pretty quckly get a javascript alert with an error. This is because this component is sending a request for user information off of `req.session.user` which is undefined since we didn't log in.
-1. Go back to the login screen and login using one of the social providers from auth0.
-1. Once you login, you should be redirected to the profile view. You should now see your profile information and avatar populate the left hand card of the profile view.
-1. You can now type into the input box and add to your list of favorite things.
-  - If you were to log out, and log in with a different user, the list of favorites would be blank, and you can add a seperate list unique to the newly logged-in user. I'll let you decide whether it is worth logging in with a new user to prove that.
-1. Now go restart your nodemon process by typing `rs` into the terminal that is running nodemon. This is to simulate your nodemon process restarting after you have modified code in your server files and nodemon restarting after you save.
-1. Refresh your browser, the user data is gone since all of the session data has been cleared from the session store. How frustrating! The only way to get back to a working state is to go back to the home screen and log in again. There has to be a better way! There is. Read on for a way that you can solve this problem.
-
-## The Solution
-
-### Middleware
-Middleware is an awesome feature in express that allows us to run one or more functions before, the final controller function that is resonsible to providing a response to the request. Middleware is commonly used to protect endpoint data based on authentication, or access levels, but it is certainly useful in several other use-cases as well.
-
-### app.use(middlewareFunction)
-We are able to designate a middleware function to run before every endpoint defined below it.
+## Cleanup
+Click the 'Cleanup DB' link in the header and read the instructions on the page. Click the red button when you are finished reading about what the red button will do.
