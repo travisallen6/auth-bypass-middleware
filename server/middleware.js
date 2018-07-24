@@ -32,7 +32,10 @@ module.exports = {
                     next(new Error('No user found in database to place on req.session.user'))
                 }
             })
-            .catch( err => console.log(err))
+            .catch( err => {
+                res.status(500).send(err)
+                console.log(err)
+                })
             } else {
                 next()
             }
