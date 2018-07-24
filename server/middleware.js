@@ -6,7 +6,7 @@ module.exports = {
 
     bypassAuthInDevelopment: (userObject) => {
         return function (req, res, next) {
-            // This function uses the hard-coded user object above to set to req.session.user
+            // This function sets the data from the parameter to set to req.session.user
             console.log(chalkEnv(`NODE_ENV: ${process.env.NODE_ENV}`))
             if(!req.session.user && process.env.NODE_ENV === 'development') {
                 req.session.user = userObject
@@ -28,9 +28,8 @@ module.exports = {
                     req.session.user = user[0]
                     next()
                 } else {
-                    // If there is no user returned from the database, the hard-coded user object will be set to the session.
-                    req.session.user = imposter
-                    next()
+                    // If there is no user returned from the database, throw an error.
+                    next(new Error('No user found in database to place on req.session.user'))
                 }
             })
             .catch( err => console.log(err))
