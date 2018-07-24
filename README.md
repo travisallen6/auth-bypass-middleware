@@ -132,7 +132,10 @@ The second method: **bypassAuthInDevelopmentWithDB** accepts a single parameter,
               next()
           }
       })
-      .catch( err => console.log(err))
+      .catch( err => {
+        res.status(500).send(err)
+        console.log(err)
+      })
       } else {
           next()
       }
