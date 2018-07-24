@@ -142,4 +142,4 @@ Let's take a look at our second middleware option which will directly query the 
 1. You should no longer see Ron Swanson logged in, but instead the user from the database with the ID you specified should now be logged in.
 
 ## Cleanup
-Click the 'Cleanup DB' link in the header and read the instructions on the page. Click the red button when you are finished reading about what the red button will do.
+Click the 'Cleanup DB' link in the header and read the instructions on the page. Clicking the red button will send a request to a server endpoint that will drop the two tables that were automatically created for this example. Once the tables are dropped, your node/nodemon process will exit. Avoid restarting node/nodemon in this project after the process exits or the example tables will be created again.
