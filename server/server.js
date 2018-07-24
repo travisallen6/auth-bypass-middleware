@@ -30,9 +30,14 @@ massive( CONNECTION_STRING )
     dU.bootstrapDB(db)
 })
 
-// app.use(mid.bypassAuthInDevelopment)
+// app.use(mid.bypassAuthInDevelopment({
+//     id:45, 
+//     auth_id:'tinder-oauth2|1337', 
+//     user_name: 'Ron Swanson',	
+//     user_pic: 'http://cdn.playbuzz.com/cdn/173e8dc2-5516-41c1-8e34-43bf6f03b6d8/74395ba4-9272-48b1-8d3f-839a0e53cfef_560_420.jpg',
+// }))
 
-// app.use(mid.bypassAuthInDevelopmentWithDB)
+// app.use(mid.bypassAuthInDevelopmentWithDB(1))
 
 app.get('/auth/callback', ctrl.authCallback)
 
