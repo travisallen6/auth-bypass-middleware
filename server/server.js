@@ -50,7 +50,7 @@ app.route('/api/favorites')
     .post(ctrl.addFavorite)
 
 app.get('/cleanupdb', dU.cleanupDB)
-app.get('/killprocess', dU.killProcess)
 
+app.get('/killprocess', dU.killProcess)
 
 app.listen( SERVER_PORT, () => console.log( chalk.cyan.underline(`Hard to port ${SERVER_PORT}`) ))
